@@ -1,0 +1,70 @@
+//Matrix Diagonal Sum
+class Solution {
+    public int diagonalSum(int[][] mat) {
+       int n = mat.length;
+       int sum =0;
+       for(int i =0;i<n;i++){
+        sum += mat[i][i];
+        sum += mat[i][n-1-i];
+       }
+       if(n%2 == 1){
+        sum -=  mat[n/2][n/2];
+       }
+       return sum;
+    }
+}
+
+//Reshape the Matrix
+class Solution {
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int n = mat.length;
+        int m = mat[0].length;
+        int [][]result = new int[r][c];
+        if( n*m != r*c){
+            return mat;
+        }
+        for(int k=0;k<n*m;k++){
+            result[k/c][k%c] = mat[k/m][k%m];
+        }
+        return result;
+    }
+}
+
+//Spiral Matrix
+import java.util.*;
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] mat) {
+
+        List<Integer> result = new ArrayList<>();
+        int n = mat.length;
+        int m = mat[0].length;
+        int srow = 0;
+        int erow = n - 1;
+        int scol = 0;
+        int ecol = m - 1;
+        while (srow <= erow && scol <= ecol) {
+            for (int i = scol; i <= ecol; i++) {
+                result.add(mat[srow][i]);
+            }
+            for (int j = srow + 1; j <= erow; j++) {
+                result.add(mat[j][ecol]);
+            }
+            if (srow < erow) {
+                for (int i = ecol - 1; i >= scol; i--) {
+                    result.add(mat[erow][i]);
+                }
+            }
+            if (scol < ecol) {
+                for (int j = erow - 1; j >= srow + 1; j--) {
+                    result.add(mat[j][scol]);
+                }
+            }
+            srow++;
+            scol++;
+            erow--;
+            ecol--;
+        }
+       return result;
+    }
+}
